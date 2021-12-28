@@ -1,0 +1,39 @@
+﻿@page "/productos"
+
+@inject IGetProductsUseCase ProductsUseCase
+@inject IDeleteProductUseCase DeleteProductUseCase
+@inject IGetCategoryByIdUseCase GetCategoryByIdUseCase
+@inject NavigationManager NavigationManager
+
+<h3>Administrar Productos</h3>
+
+@if (products != null)
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Categoria</th>
+                <th>Nombre</th>
+                <th>Precio</th>
+                <th>Cantidad</th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var product in products)
+            {
+                <tr>
+                    <td>@GetCategoryByIdUseCase.Execute(product.CategoryId.Value)?.Name</td>
+                    <td>@product.Name</td>
+                    <td>@(Math.Round(product.Price.Value, 2))</td>
+                    <td>@product.Quantity</td>
+                    <td><button type="button" class="btn btn-link" @onclick="() => EditProduct(product)">Editar</button></td>
+                    <td><button type="button" class="btn btn-link" @onclick="() => DeleteProduct(product.ProductId)">Eliminar</button></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <button type="button" class="btn btn-primary" @onclick="() => AddProduct()">Añadir</button>
+}

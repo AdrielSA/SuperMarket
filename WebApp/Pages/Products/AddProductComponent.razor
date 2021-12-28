@@ -1,0 +1,44 @@
+﻿@page "/agregarproducto"
+
+@inject IAddProductUseCase AddProductUseCase
+@inject IGetCategoriesUseCase GetCategoriesUseCase
+@inject NavigationManager NavigationManager
+
+<h3>Agregar Producto</h3>
+
+@if (product != null)
+{
+    <EditForm Model="product" OnValidSubmit="AddProduct">
+        <DataAnnotationsValidator />
+
+        <div class="form-group">
+            <label for="Category">Categoria</label>
+            <InputSelect class="form-control" @bind-Value="product.CategoryId" id="Category">
+                <option value="0" selected></option>
+                @foreach (var category in categories)
+                    {
+                    <option value="@category.CategoryId">@category.Name</option>
+                    }
+            </InputSelect>
+            <ValidationMessage For="() => product.CategoryId" />
+        </div>
+        <div class="form-group">
+            <label for="Name">Nombre</label>
+            <InputText id="Name" @bind-Value="product.Name" class="form-control" />
+            <ValidationMessage For="() => product.Name" />
+        </div>
+        <div class="form-group">
+            <label for="Quantity">Cantidad</label>
+            <InputNumber id="Quantity" @bind-Value="product.Quantity" class="form-control" />
+            <ValidationMessage For="() => product.Quantity" />
+        </div>
+        <div class="form-group">
+            <label for="Price">Precio</label>
+            <InputNumber id="Price" @bind-Value="product.Price" @bind-Value:format="F2" class="form-control" />
+            <ValidationMessage For="() => product.Price" />
+        </div>
+
+        <button type="submit" class="btn btn-primary">Agregar</button>
+        <button type="button" class="btn btn-secondary" @onclick="Cancel">Cancelar</button>
+    </EditForm>
+}

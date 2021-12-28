@@ -1,0 +1,28 @@
+﻿@page "/caja"
+
+<div class="row">
+    <div class="col"><h3>Caja</h3></div>
+    <div class="col-3">
+        <div class="form-group">
+            <label for="CashierName">Cajero/a:</label>
+            <input type="text" id="CashierName" class="form-control" @bind-value="cashierName" />
+        </div>
+    </div>
+</div>
+
+<br />
+<div class="row">
+    <div class="col-3">
+        <SelectProductForSellingComponent ProductSelected="SelectedProduct" />
+        @if (selectedProduct != null)
+        {
+            <SellProductComponent 
+                                  CashierName="@cashierName"
+                                  SelectedProduct="selectedProduct" 
+                                  ProductSold="SellProduct" />
+        }
+    </div>
+    <div class="col">
+        <TodayTransactionsComponent @ref="transactionComponent" />
+    </div>
+</div>

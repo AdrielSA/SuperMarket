@@ -1,0 +1,27 @@
+﻿@page "/editarcategoria/{CategoryId}"
+
+@inject NavigationManager NavigationManager
+@inject IEditCategoryUseCase EditCategoryUseCase
+@inject IGetCategoryByIdUseCase GetCategoryByIdUseCase
+
+<h3>Editar Categoria</h3>
+
+@if (category != null)
+{
+    <EditForm Model="category" OnValidSubmit="EditCategory">
+        <DataAnnotationsValidator />
+
+        <div class="form-group">
+            <label for="Name">Nombre</label>
+            <InputText id="Name" @bind-Value="category.Name" class="form-control" />
+            <ValidationMessage For="() => category.Name" />
+        </div>
+        <div class="form-group">
+            <label for="Description">Descripción</label>
+            <InputTextArea id="Description" @bind-Value="category.Description" class="form-control" />
+        </div>
+
+        <button type="submit" class="btn btn-primary">Modificar</button>
+        <button type="button" class="btn btn-secondary" @onclick="Cancel">Cancelar</button>
+    </EditForm>
+}

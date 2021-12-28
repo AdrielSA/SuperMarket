@@ -1,0 +1,34 @@
+﻿@page "/categorias"
+
+@inject IGetCategoriesUseCase ViewCategoryUseCase
+@inject IDeleteCategoryUseCase DeleteCategoryUseCase
+@inject NavigationManager NavigationManager
+
+<h3>Administrar Categorias</h3>
+
+@if (categories != null)
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Descripción</th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var category in categories)
+            {
+                <tr>
+                    <td>@category.Name</td>
+                    <td>@category.Description</td>
+                    <td><button type="button" class="btn btn-link" @onclick="() => EditCategory(category)">Editar</button></td>
+                    <td><button type="button" class="btn btn-link" @onclick="() => DeleteCategory(category.CategoryId)">Eliminar</button></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+<br />
+<button type="button" @onclick="AddCategory" class="btn btn-primary">Añadir</button>

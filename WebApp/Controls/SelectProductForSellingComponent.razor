@@ -1,0 +1,37 @@
+﻿@inject IGetCategoriesUseCase GetCategoriesUseCase
+@inject IGetProductsByCategoryIdUseCase GetProductsByCategoryId
+
+<div class="form-group">
+    <label for="Category">Categoria</label>
+    <select class="form-control" @bind="SelectedCategoryId" id="Category">
+        <option value="0" selected></option>
+        @foreach (var category in categories)
+        {
+            <option value="@category.CategoryId">@category.Name</option>
+        }
+    </select>
+</div>
+
+@if (productsInCategory != null)
+{
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Producto</th>
+                <th>Cantidad Restante</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var prod in productsInCategory)
+            {
+                <tr @onclick="() => SelectProduct(prod)" 
+                    style="@(prod.ProductId == selectedProductId?
+                    "background-color:silver; cursor:pointer":"cursor:pointer")">
+                    
+                    <td>@prod.Name</td>
+                    <td>@prod.Quantity</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
