@@ -1,4 +1,5 @@
 ﻿using CoreBusiness.Entities;
+using System.Threading.Tasks;
 using UseCases.DataStoreInterfaces;
 using UseCases.UseCaseInterfaces.Products;
 
@@ -13,9 +14,9 @@ namespace UseCases.ProductsUseCases
             _unitOfWork = unitOfWork;
         }
 
-        public Product Execute(int productId)
+        public async Task<Product> Execute(int productId)
         {
-            return _unitOfWork.ProductRepository.GetProductById(productId);
+            return await _unitOfWork.ProductRepository.GetProductById(productId);
         }
     }
 }

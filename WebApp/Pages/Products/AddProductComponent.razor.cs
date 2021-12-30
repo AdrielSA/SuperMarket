@@ -1,7 +1,5 @@
 ﻿using CoreBusiness.Entities;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace WebApp.Pages.Products
@@ -9,18 +7,18 @@ namespace WebApp.Pages.Products
     public partial class AddProductComponent
     {
         private Product product;
-        private List<Category> categories;
+        private IEnumerable<Category> categories;
 
-        protected override void OnInitialized()
+        protected override async Task OnInitializedAsync()
         {
-            base.OnInitialized();
+            await base.OnInitializedAsync();
             product = new Product();
-            categories = GetCategoriesUseCase.Execute().ToList();
+            categories = await GetCategoriesUseCase.Execute();
         }
 
-        private void AddProduct()
+        private async Task AddProduct()
         {
-            AddProductUseCase.Execute(product);
+            await AddProductUseCase.Execute(product);
             NavigationManager.NavigateTo("/productos");
         }
 

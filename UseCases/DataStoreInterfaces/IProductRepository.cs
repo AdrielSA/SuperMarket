@@ -9,16 +9,16 @@ namespace UseCases.DataStoreInterfaces
 {
     public interface IProductRepository
     {
-        IEnumerable<Product> GetProducts();
+        Task<IEnumerable<Product>> GetProducts();
 
-        Product GetProductById(int productId);
+        Task<Product> GetProductById(int productId);
 
-        IEnumerable<Product> GetProductsByCategoryId(int categoryId);
+        Task<IEnumerable<Product>> GetProductsByCategoryId(int categoryId);
 
-        void AddProduct(Product product);
+        Task AddProduct(Product product);
 
-        void UpdateProduct(Product product);
+        Task UpdateProduct(Product product);
 
-        void DeleteProduct(int productId);
+        Task DeleteProduct(int productId);
     }
 }

@@ -1,19 +1,17 @@
 ﻿using CoreBusiness.Entities;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace WebApp.Pages.Categories
 {
     public partial class CategoriesComponent
     {
-        private List<Category> categories;
+        private IEnumerable<Category> categories;
 
-        protected override void OnInitialized()
+        protected override async Task OnInitializedAsync()
         {
-            base.OnInitialized();
-            Load();
+            await base.OnInitializedAsync();
+            await Load();
         }
 
         private void AddCategory()
@@ -26,15 +24,15 @@ namespace WebApp.Pages.Categories
             NavigationManager.NavigateTo($"/editarcategoria/{category.CategoryId}");
         }
 
-        private void DeleteCategory(int categoryId)
+        private async Task DeleteCategory(int categoryId)
         {
-            DeleteCategoryUseCase.Delete(categoryId);
-            Load();
+            await DeleteCategoryUseCase.Delete(categoryId);
+            await Load();
         }
 
-        private void Load()
+        private async Task Load()
         {
-            categories = ViewCategoryUseCase.Execute().ToList();
+            categories = await ViewCategoryUseCase.Execute();
         }
     }
 }

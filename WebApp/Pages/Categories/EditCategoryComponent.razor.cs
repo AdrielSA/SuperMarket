@@ -1,8 +1,5 @@
 ﻿using CoreBusiness.Entities;
 using Microsoft.AspNetCore.Components;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace WebApp.Pages.Categories
@@ -13,25 +10,25 @@ namespace WebApp.Pages.Categories
         public string CategoryId { get; set; }
         private Category category;
 
-        protected override void OnInitialized()
+        protected override async Task OnInitializedAsync()
         {
-            base.OnInitialized();
+            await base.OnInitializedAsync();
             category = new Category();
         }
 
-        protected override void OnParametersSet()
+        protected override async Task OnParametersSetAsync()
         {
-            base.OnParametersSet();
             if (int.TryParse(CategoryId, out int Id))
             {
-                var cat = this.category = GetCategoryByIdUseCase.Execute(Id);
+                var cat = category = await GetCategoryByIdUseCase.Execute(Id);
                 category = new Category { CategoryId = cat.CategoryId, Name = cat.Name, Description = cat.Description };
             }
+            await base.OnParametersSetAsync();
         }
 
-        private void EditCategory()
+        private async Task EditCategory()
         {
-            EditCategoryUseCase.Execute(category);
+            await EditCategoryUseCase.Execute(category);
             NavigationManager.NavigateTo("/categorias");
         }
 

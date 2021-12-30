@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UseCases.DataStoreInterfaces;
 using UseCases.UseCaseInterfaces.Transactions;
 
@@ -14,9 +15,9 @@ namespace UseCases.TransactionsUseCases
             _unitOfWork = unitOfWork;
         }
 
-        public IEnumerable<CoreBusiness.Entities.Transaction> Execute(string cashierName)
+        public async Task<IEnumerable<CoreBusiness.Entities.Transaction>> Execute(string cashierName)
         {
-            return _unitOfWork.TransactionRepository.GetByDay(cashierName, DateTime.Now);
+            return await _unitOfWork.TransactionRepository.GetByDay(cashierName, DateTime.Now);
         }
     }
 }

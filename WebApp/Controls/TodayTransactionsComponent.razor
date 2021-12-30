@@ -32,11 +32,11 @@
 }
 
 @code {
-    private List<Transaction> transactions;
+    private IEnumerable<Transaction> transactions;
 
-    public void LoadTransactions(string cashierName)
+    public async Task LoadTransactions(string cashierName)
     {
-        transactions = GetTodayTransactionsUseCase.Execute(cashierName).ToList();
+        transactions = await GetTodayTransactionsUseCase.Execute(cashierName);
         StateHasChanged();
     }
 }

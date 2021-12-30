@@ -9,14 +9,14 @@ namespace UseCases.DataStoreInterfaces
 {
     public interface ICategoryRepository
     {
-        IEnumerable<Category> GetCategories();
+        Task<IEnumerable<Category>> GetCategories();
 
-        Category GetCategoryById(int categoryId);
+        Task<Category> GetCategoryById(int categoryId);
 
-        void AddCategory(Category category);
+        Task AddCategory(Category category);
 
-        void UpdateCategory(Category category);
+        Task UpdateCategory(Category category);
 
-        void DeleteCategory(int categoryId);
+        Task DeleteCategory(int categoryId);
     }
 }

@@ -1,4 +1,5 @@
-﻿using UseCases.DataStoreInterfaces;
+﻿using System.Threading.Tasks;
+using UseCases.DataStoreInterfaces;
 using UseCases.UseCaseInterfaces.Categories;
 
 namespace UseCases.CategoriesUseCase
@@ -12,9 +13,9 @@ namespace UseCases.CategoriesUseCase
             _unitOfWork = unitOfWork;
         }
 
-        public void Delete(int categoryId)
+        public async Task Delete(int categoryId)
         {
-            _unitOfWork.CategoryRepository.DeleteCategory(categoryId);
+            await _unitOfWork.CategoryRepository.DeleteCategory(categoryId);
         }
     }
 }

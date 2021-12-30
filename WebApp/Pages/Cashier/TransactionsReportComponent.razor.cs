@@ -2,7 +2,6 @@
 using Microsoft.JSInterop;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace WebApp.Pages.Cashier
@@ -13,18 +12,18 @@ namespace WebApp.Pages.Cashier
         private DateTime startDate;
         private DateTime endDate;
 
-        private List<Transaction> transactions;
+        private IEnumerable<Transaction> transactions;
 
-        protected override void OnInitialized()
+        protected override async Task OnInitializedAsync()
         {
-            base.OnInitialized();
+            await base.OnInitializedAsync();
             startDate = DateTime.Today;
             endDate = DateTime.Today;
         }
 
-        private void LoadTransactions()
+        private async Task LoadTransactions()
         {
-            transactions = GetTransactionsUseCase.Execute(cashierName, startDate, endDate).ToList();
+            transactions = await GetTransactionsUseCase.Execute(cashierName, startDate, endDate);
         }
 
         private async Task PrintReport()

@@ -1,4 +1,5 @@
-﻿using UseCases.DataStoreInterfaces;
+﻿using System.Threading.Tasks;
+using UseCases.DataStoreInterfaces;
 using UseCases.UseCaseInterfaces.Products;
 
 namespace UseCases.ProductsUseCases
@@ -12,14 +13,14 @@ namespace UseCases.ProductsUseCases
             _unitOfWork = unitOfWork;
         }
 
-        public void Execute(string cashierName, int  productId, int qtyToSell)
+        public async Task Execute(string cashierName, int  productId, int qtyToSell)
         {
-            var product = _unitOfWork.ProductRepository.GetProductById(productId);
+            var product = await _unitOfWork.ProductRepository.GetProductById(productId);
             if (product == null) return;
-            _unitOfWork.TransactionRepository.Save(cashierName, productId, product.Name,
+            await _unitOfWork.TransactionRepository.Save(cashierName, productId, product.Name,
                 product.Price.Value, product.Quantity.Value, qtyToSell);
             product.Quantity -= qtyToSell;
-            _unitOfWork.ProductRepository.UpdateProduct(product);
+            await _unitOfWork.ProductRepository.UpdateProduct(product);
         }
     }
 }

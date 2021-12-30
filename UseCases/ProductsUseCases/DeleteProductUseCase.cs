@@ -1,4 +1,5 @@
-﻿using UseCases.DataStoreInterfaces;
+﻿using System.Threading.Tasks;
+using UseCases.DataStoreInterfaces;
 using UseCases.UseCaseInterfaces.Products;
 
 namespace UseCases.ProductsUseCases
@@ -12,9 +13,9 @@ namespace UseCases.ProductsUseCases
             _unitOfWork = unitOfWork;
         }
 
-        public void Delete(int productId)
+        public async Task Delete(int productId)
         {
-            _unitOfWork.ProductRepository.DeleteProduct(productId);
+            await _unitOfWork.ProductRepository.DeleteProduct(productId);
         }
     }
 }

@@ -1,7 +1,4 @@
 ﻿using CoreBusiness.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace WebApp.Pages.Categories
@@ -10,15 +7,15 @@ namespace WebApp.Pages.Categories
     {
         private Category category;
 
-        protected override void OnInitialized()
+        protected override async Task OnInitializedAsync()
         {
-            base.OnInitialized();
+            await base.OnInitializedAsync();
             category = new Category();
         }
 
-        private void AddCategory()
+        private async Task AddCategory()
         {
-            AddCategoryUsaCase.Execute(category);
+            await AddCategoryUsaCase.Execute(category);
             NavigationManager.NavigateTo("/categorias");
         }
 

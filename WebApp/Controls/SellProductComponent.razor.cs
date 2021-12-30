@@ -1,8 +1,5 @@
 ﻿using CoreBusiness.Entities;
 using Microsoft.AspNetCore.Components;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace WebApp.Controls
@@ -21,9 +18,9 @@ namespace WebApp.Controls
         private string errorMessage;
         private Product productToSell;
 
-        protected override void OnParametersSet()
+        protected override async Task OnParametersSetAsync()
         {
-            base.OnParametersSet();
+            await base.OnParametersSetAsync();
             if (SelectedProduct != null)
             {
                 productToSell = new Product()
@@ -37,23 +34,23 @@ namespace WebApp.Controls
             }
         }
 
-        private void SellProduct()
+        private async Task SellProduct()
         {
             if (string.IsNullOrWhiteSpace(CashierName))
             {
                 errorMessage = "Falta el nombre del cajero/a.";
                 return;
             }
-            var prod = GetProductByIdUseCase.Execute(productToSell.ProductId);
+            var prod = await GetProductByIdUseCase.Execute(productToSell.ProductId);
             if (productToSell.Quantity <= 0)
             {
                 errorMessage = "La cantidad debe ser mayor a cero (0).";
             }
             else if (prod.Quantity >= productToSell.Quantity)
             {
-                ProductSold.InvokeAsync(productToSell);
+                await ProductSold.InvokeAsync(productToSell);
                 errorMessage = string.Empty;
-                SellProductUseCase.Execute(CashierName ,productToSell.ProductId, productToSell.Quantity.Value);
+                await SellProductUseCase.Execute(CashierName, productToSell.ProductId, productToSell.Quantity.Value);
             }
             else
             {

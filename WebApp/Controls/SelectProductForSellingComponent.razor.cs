@@ -1,8 +1,6 @@
 ﻿using CoreBusiness.Entities;
 using Microsoft.AspNetCore.Components;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace WebApp.Controls
@@ -12,15 +10,15 @@ namespace WebApp.Controls
         [Parameter]
         public EventCallback<Product> ProductSelected { get; set; }
 
-        private List<Category> categories;
-        private List<Product> productsInCategory;
+        private IEnumerable<Category> categories;
+        private IEnumerable<Product> productsInCategory;
         private int selectedCategoryId;
         private int selectedProductId;
 
-        protected override void OnInitialized()
+        protected override async Task OnInitializedAsync()
         {
-            base.OnInitialized();
-            categories = GetCategoriesUseCase.Execute().ToList();
+            await base.OnInitializedAsync();
+            categories = await GetCategoriesUseCase.Execute();
         }
 
         private int SelectedCategoryId
@@ -32,7 +30,7 @@ namespace WebApp.Controls
             set
             {
                 selectedCategoryId = value;
-                productsInCategory = GetProductsByCategoryId.Execute(value).ToList();
+                productsInCategory = GetProductsByCategoryId.Execute(value).Result;
                 SelectProduct(null);
                 StateHasChanged();
             }

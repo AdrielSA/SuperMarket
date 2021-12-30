@@ -14,11 +14,6 @@ namespace DataStore.SQL.Extensions
     {
         public static IServiceCollection AddServices(this IServiceCollection services)
         {
-            ////Injección de dependencias para los repositorios en memoria
-            //services.AddScoped<ICategoryRepository, CategoryInMemoryRepository>();
-            //services.AddScoped<IProductRepository, ProductInMemoryRepository>();
-            //services.AddScoped<ITransactionRepository, TransactionInMemoryRepository>();
-
             // Injección de dependencias para los repositorios SQL
             services.AddScoped<ICategoryRepository, CategoryRepository>();
             services.AddScoped<IProductRepository, ProductRepository>();

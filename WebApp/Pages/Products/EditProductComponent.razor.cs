@@ -1,8 +1,6 @@
 ﻿using CoreBusiness.Entities;
 using Microsoft.AspNetCore.Components;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace WebApp.Pages.Products
@@ -12,20 +10,20 @@ namespace WebApp.Pages.Products
         [Parameter]
         public string ProductId { get; set; }
         private Product product;
-        private List<Category> categories;
+        private IEnumerable<Category> categories;
 
-        protected override void OnInitialized()
+        protected override async Task OnInitializedAsync()
         {
-            base.OnInitialized();
-            categories = GetCategoriesUseCase.Execute().ToList();
+            await base.OnInitializedAsync();
+            categories = await GetCategoriesUseCase.Execute();
         }
 
-        protected override void OnParametersSet()
+        protected override async Task OnParametersSetAsync()
         {
-            base.OnParametersSet();
+            await base.OnParametersSetAsync();
             if (int.TryParse(ProductId, out int Id))
             {
-                var prod = this.product = GetProductByIdUseCase.Execute(Id);
+                var prod = this.product = await GetProductByIdUseCase.Execute(Id);
                 product = new Product
                 {
                     ProductId = prod.ProductId,
@@ -37,9 +35,9 @@ namespace WebApp.Pages.Products
             }
         }
 
-        private void EditProduct()
+        private async Task EditProduct()
         {
-            EditProductUseCase.Execute(product);
+            await EditProductUseCase.Execute(product);
             NavigationManager.NavigateTo("/productos");
         }
 

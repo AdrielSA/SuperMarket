@@ -1,7 +1,9 @@
 ﻿using CoreBusiness.Entities;
 using DataStore.SQL.Context;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using UseCases.DataStoreInterfaces;
 
 namespace DataStore.SQL.Repositories
@@ -15,44 +17,45 @@ namespace DataStore.SQL.Repositories
             _context = context;
         }
 
-        public void AddProduct(Product product)
+        public async Task AddProduct(Product product)
         {
-            _context.Products.Add(product);
-            _context.SaveChanges();
+            await _context.Products.AddAsync(product);
+            await _context.SaveChangesAsync();
         }
 
-        public void DeleteProduct(int productId)
+        public async Task DeleteProduct(int productId)
         {
-            var prod = GetProductById(productId);
+            var prod = await GetProductById(productId);
             if (prod == null) return;
             _context.Products.Remove(prod);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
 
-        public Product GetProductById(int productId)
+        public async Task<Product> GetProductById(int productId)
         {
-            return _context.Products.Find(productId);
+            return await _context.Products.FindAsync(productId);
         }
 
-        public IEnumerable<Product> GetProducts()
+        public async Task<IEnumerable<Product>> GetProducts()
         {
-            return _context.Products.ToList();
+            return await _context.Products.ToListAsync();
         }
 
-        public IEnumerable<Product> GetProductsByCategoryId(int categoryId)
+        public async Task<IEnumerable<Product>> GetProductsByCategoryId(int categoryId)
         {
-            return _context.Products.Where(x => x.CategoryId == categoryId).ToList();
+            var products = _context.Products.Where(x => x.CategoryId == categoryId).AsQueryable();
+            return await products.ToListAsync();
         }
 
-        public void UpdateProduct(Product product)
+        public async Task UpdateProduct(Product product)
         {
-            var prod = GetProductById(product.ProductId);
+            var prod = await GetProductById(product.ProductId);
             prod.CategoryId = product.CategoryId;
             prod.Name = product.Name;
             prod.Quantity = product.Quantity;
             prod.Price = product.Price;
             _context.Products.Update(prod);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
     }
 }

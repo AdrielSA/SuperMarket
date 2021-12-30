@@ -18,7 +18,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\CoreBusiness\CoreBusiness.csproj" />
-    <ProjectReference Include="..\DataStore.InMemory\DataStore.InMemory.csproj" />
     <ProjectReference Include="..\DataStore.SQL\DataStore.SQL.csproj" />
     <ProjectReference Include="..\UseCases\UseCases.csproj" />
   </ItemGroup>

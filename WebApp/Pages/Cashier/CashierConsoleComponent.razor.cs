@@ -1,7 +1,4 @@
 ﻿using CoreBusiness.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using WebApp.Controls;
 
@@ -13,12 +10,12 @@ namespace WebApp.Pages.Cashier
         private string cashierName;
         private TodayTransactionsComponent transactionComponent;
 
-        protected override void OnAfterRender(bool firstRender)
+        protected override async Task OnAfterRenderAsync(bool firstRender)
         {
-            base.OnAfterRender(firstRender);
+            await base.OnAfterRenderAsync(firstRender);
             if (firstRender)
             {
-                SellProduct();
+                await SellProduct();
             }
         }
 
@@ -27,9 +24,9 @@ namespace WebApp.Pages.Cashier
             selectedProduct = product;
         }
 
-        private void SellProduct()
+        private async Task SellProduct()
         {
-            transactionComponent.LoadTransactions(cashierName);
+            await transactionComponent.LoadTransactions(cashierName);
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using CoreBusiness.Entities;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UseCases.DataStoreInterfaces;
 using UseCases.UseCaseInterfaces.Categories;
 
@@ -14,9 +15,9 @@ namespace UseCases.CategoriesUseCase
             _unitOfWork = unitOfWork;
         }
 
-        public IEnumerable<Category> Execute()
+        public async Task<IEnumerable<Category>> Execute()
         {
-            return _unitOfWork.CategoryRepository.GetCategories();
+            return await _unitOfWork.CategoryRepository.GetCategories();
         }
     }
 }

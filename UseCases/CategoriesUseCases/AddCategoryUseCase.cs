@@ -1,4 +1,5 @@
 ﻿using CoreBusiness.Entities;
+using System.Threading.Tasks;
 using UseCases.DataStoreInterfaces;
 using UseCases.UseCaseInterfaces.Categories;
 
@@ -13,9 +14,9 @@ namespace UseCases.CategoriesUseCase
             _unitOfWork = unitOfWork;
         }
 
-        public void Execute(Category category)
+        public async Task Execute(Category category)
         {
-            _unitOfWork.CategoryRepository.AddCategory(category);
+            await _unitOfWork.CategoryRepository.AddCategory(category);
         }
     }
 }

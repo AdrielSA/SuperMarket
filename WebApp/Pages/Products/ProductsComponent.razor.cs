@@ -1,19 +1,17 @@
 ﻿using CoreBusiness.Entities;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace WebApp.Pages.Products
 {
     public partial class ProductsComponent
     {
-        private List<Product> products;
+        private IEnumerable<Product> products;
 
-        protected override void OnInitialized()
+        protected override async Task OnInitializedAsync()
         {
-            base.OnInitialized();
-            Load();
+            await base.OnInitializedAsync();
+            await Load();
         }
 
         private void AddProduct()
@@ -26,15 +24,15 @@ namespace WebApp.Pages.Products
             NavigationManager.NavigateTo($"/editarproducto/{product.ProductId}");
         }
 
-        private void DeleteProduct(int productId)
+        private async Task DeleteProduct(int productId)
         {
-            DeleteProductUseCase.Delete(productId);
-            Load();
+            await DeleteProductUseCase.Delete(productId);
+            await Load();
         }
 
-        private void Load()
+        private async Task Load()
         {
-            products = ProductsUseCase.Execute().ToList();
+            products = await ProductsUseCase.Execute();
         }
     }
 }

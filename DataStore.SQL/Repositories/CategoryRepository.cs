@@ -1,7 +1,9 @@
 ﻿using CoreBusiness.Entities;
 using DataStore.SQL.Context;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using UseCases.DataStoreInterfaces;
 
 namespace DataStore.SQL.Repositories
@@ -15,37 +17,37 @@ namespace DataStore.SQL.Repositories
             _context = context;
         }
 
-        public void AddCategory(Category category)
+        public async Task AddCategory(Category category)
         {
-            _context.Categories.Add(category);
-            _context.SaveChanges();
+            await _context.Categories.AddAsync(category);
+            await _context.SaveChangesAsync();
         }
 
-        public void DeleteCategory(int categoryId)
+        public async Task DeleteCategory(int categoryId)
         {
-            var cat = GetCategoryById(categoryId);
+            var cat = await GetCategoryById(categoryId);
             if (cat == null) return;
             _context.Categories.Remove(cat);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
 
-        public IEnumerable<Category> GetCategories()
+        public async Task<IEnumerable<Category>> GetCategories()
         {
-            return _context.Categories.ToList();
+            return await _context.Categories.ToListAsync();
         }
 
-        public Category GetCategoryById(int categoryId)
+        public async Task<Category> GetCategoryById(int categoryId)
         {
-            return _context.Categories.Find(categoryId);
+            return await _context.Categories.FindAsync(categoryId);
         }
 
-        public void UpdateCategory(Category category)
+        public async Task UpdateCategory(Category category)
         {
-            var cat = GetCategoryById(category.CategoryId);
+            var cat = await GetCategoryById(category.CategoryId);
             cat.Name = category.Name;
             cat.Description = category.Description;
             _context.Categories.Update(cat);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
     }
 }
