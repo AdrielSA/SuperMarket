@@ -5,6 +5,6 @@ namespace UseCases.UseCaseInterfaces.Products
 {
     public interface IAddProductUseCase
     {
-        Task Execute(Product product);
+        void Execute(Product product);
     }
 }

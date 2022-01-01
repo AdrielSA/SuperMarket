@@ -13,9 +13,9 @@ namespace WebApp.Pages.Categories
             category = new Category();
         }
 
-        private async Task AddCategory()
+        private void AddCategory()
         {
-            await AddCategoryUsaCase.Execute(category);
+            AddCategoryUsaCase.Execute(category);
             NavigationManager.NavigateTo("/categorias");
         }
 

@@ -5,6 +5,6 @@ namespace UseCases.UseCaseInterfaces.Categories
 {
     public interface IEditCategoryUseCase
     {
-        Task Execute(Category category);
+        void Execute(Category category);
     }
 }

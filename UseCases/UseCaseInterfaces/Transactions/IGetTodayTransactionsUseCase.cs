@@ -6,6 +6,6 @@ namespace UseCases.UseCaseInterfaces.Transactions
 {
     public interface IGetTodayTransactionsUseCase
     {
-        Task<IEnumerable<Transaction>> Execute(string cashierName);
+        IEnumerable<Transaction> Execute(string cashierName);
     }
 }

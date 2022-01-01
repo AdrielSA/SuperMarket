@@ -29,28 +29,27 @@ namespace WebApp.Controls
                     Name = SelectedProduct.Name,
                     CategoryId = SelectedProduct.CategoryId,
                     Price = SelectedProduct.Price,
-                    Quantity = 0
                 };
             }
         }
 
-        private async Task SellProduct()
+        private void SellProduct()
         {
             if (string.IsNullOrWhiteSpace(CashierName))
             {
                 errorMessage = "Falta el nombre del cajero/a.";
                 return;
             }
-            var prod = await GetProductByIdUseCase.Execute(productToSell.ProductId);
+            var prod = GetProductByIdUseCase.Execute(productToSell.ProductId);
             if (productToSell.Quantity <= 0)
             {
                 errorMessage = "La cantidad debe ser mayor a cero (0).";
             }
             else if (prod.Quantity >= productToSell.Quantity)
             {
-                await ProductSold.InvokeAsync(productToSell);
+                SellProductUseCase.Execute(CashierName, productToSell.ProductId, productToSell.Quantity.Value);
+                ProductSold.InvokeAsync(productToSell);
                 errorMessage = string.Empty;
-                await SellProductUseCase.Execute(CashierName, productToSell.ProductId, productToSell.Quantity.Value);
             }
             else
             {

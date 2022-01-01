@@ -34,9 +34,9 @@
 @code {
     private IEnumerable<Transaction> transactions;
 
-    public async Task LoadTransactions(string cashierName)
+    public void LoadTransactions(string cashierName)
     {
-        transactions = await GetTodayTransactionsUseCase.Execute(cashierName);
+        transactions = GetTodayTransactionsUseCase.Execute(cashierName);
         StateHasChanged();
     }
 }

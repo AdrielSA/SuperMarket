@@ -10,10 +10,7 @@ namespace DataStore.SQL.Repositories
         private readonly IProductRepository _productRepository;
         private readonly ITransactionRepository _transactionRepository;
 
-        public UnitOfWork(MarketContext context)
-        {
-            _context = context;
-        }
+        public UnitOfWork(MarketContext context) => _context = context;
 
         public ICategoryRepository CategoryRepository => _categoryRepository ?? new CategoryRepository(_context);
 

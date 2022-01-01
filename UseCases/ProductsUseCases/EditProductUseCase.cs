@@ -13,9 +13,9 @@ namespace UseCases.ProductsUseCases
         {
             _unitOfWork = unitOfWork;
         }
-        public async Task Execute(Product product)
+        public void Execute(Product product)
         {
-            await _unitOfWork.ProductRepository.UpdateProduct(product);
+            _unitOfWork.ProductRepository.UpdateProduct(product);
         }
     }
 }

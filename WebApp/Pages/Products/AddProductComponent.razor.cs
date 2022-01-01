@@ -13,12 +13,12 @@ namespace WebApp.Pages.Products
         {
             await base.OnInitializedAsync();
             product = new Product();
-            categories = await GetCategoriesUseCase.Execute();
+            categories = GetCategoriesUseCase.Execute();
         }
 
-        private async Task AddProduct()
+        private void AddProduct()
         {
-            await AddProductUseCase.Execute(product);
+            AddProductUseCase.Execute(product);
             NavigationManager.NavigateTo("/productos");
         }
 

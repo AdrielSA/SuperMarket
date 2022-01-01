@@ -4,6 +4,6 @@ namespace UseCases.UseCaseInterfaces.Categories
 {
     public interface IDeleteCategoryUseCase
     {
-        Task Delete(int categoryId);
+        void Delete(int categoryId);
     }
 }

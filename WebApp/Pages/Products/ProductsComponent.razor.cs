@@ -11,7 +11,7 @@ namespace WebApp.Pages.Products
         protected override async Task OnInitializedAsync()
         {
             await base.OnInitializedAsync();
-            await Load();
+            Load();
         }
 
         private void AddProduct()
@@ -24,15 +24,15 @@ namespace WebApp.Pages.Products
             NavigationManager.NavigateTo($"/editarproducto/{product.ProductId}");
         }
 
-        private async Task DeleteProduct(int productId)
+        private void DeleteProduct(int productId)
         {
-            await DeleteProductUseCase.Delete(productId);
-            await Load();
+            DeleteProductUseCase.Delete(productId);
+            Load();
         }
 
-        private async Task Load()
+        private void Load()
         {
-            products = await ProductsUseCase.Execute();
+            products = ProductsUseCase.Execute();
         }
     }
 }

@@ -11,12 +11,6 @@ namespace DataStore.SQL.Context.Configurations
             builder.HasMany(c => c.Products)
                     .WithOne(p => p.Category)
                     .HasForeignKey(p => p.CategoryId);
-
-            builder.HasData(
-                    new Category { CategoryId = 1, Name = "Bebida", Description = "Bebida" },
-                    new Category { CategoryId = 2, Name = "Panaderia", Description = "Panaderia" },
-                    new Category { CategoryId = 3, Name = "Carne", Description = "Carne" }
-                );
         }
     }
 }

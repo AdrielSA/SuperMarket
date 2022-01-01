@@ -4,6 +4,6 @@ namespace UseCases.UseCaseInterfaces.Products
 {
     public interface IDeleteProductUseCase
     {
-        Task Delete(int productId);
+        void Delete(int productId);
     }
 }

@@ -15,12 +15,6 @@ namespace WebApp.Controls
         private int selectedCategoryId;
         private int selectedProductId;
 
-        protected override async Task OnInitializedAsync()
-        {
-            await base.OnInitializedAsync();
-            categories = await GetCategoriesUseCase.Execute();
-        }
-
         private int SelectedCategoryId
         {
             get
@@ -30,16 +24,22 @@ namespace WebApp.Controls
             set
             {
                 selectedCategoryId = value;
-                productsInCategory = GetProductsByCategoryId.Execute(value).Result;
+                productsInCategory = GetProductsByCategoryId.Execute(value);
                 SelectProduct(null);
-                StateHasChanged();
             }
+        }
+
+        protected override async Task OnInitializedAsync()
+        {
+            await base.OnInitializedAsync();
+            categories = GetCategoriesUseCase.Execute();
         }
 
         private void SelectProduct(Product product)
         {
             ProductSelected.InvokeAsync(product);
             if (product != null) selectedProductId = product.ProductId;
+            StateHasChanged();
         }
     }
 }

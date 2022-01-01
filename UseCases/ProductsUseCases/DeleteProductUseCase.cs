@@ -13,9 +13,9 @@ namespace UseCases.ProductsUseCases
             _unitOfWork = unitOfWork;
         }
 
-        public async Task Delete(int productId)
+        public void Delete(int productId)
         {
-            await _unitOfWork.ProductRepository.DeleteProduct(productId);
+            _unitOfWork.ProductRepository.DeleteProduct(productId);
         }
     }
 }

@@ -13,10 +13,10 @@ namespace UseCases.TransactionsUseCases
             _unitOfWork = unitOfWork;
         }
 
-        public async Task Execute(string cashierName, int productId, int qty)
+        public void Execute(string cashierName, int productId, int qty)
         {
-            var product = await _unitOfWork.ProductRepository.GetProductById(productId);
-            await _unitOfWork.TransactionRepository.Save(cashierName, productId, product.Name, 
+            var product = _unitOfWork.ProductRepository.GetProductById(productId);
+            _unitOfWork.TransactionRepository.Save(cashierName, productId, product.Name, 
                 product.Price.Value, product.Quantity.Value, qty);
         }
     }

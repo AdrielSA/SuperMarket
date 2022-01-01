@@ -5,6 +5,6 @@ namespace UseCases.UseCaseInterfaces.Categories
 {
     public interface IGetCategoryByIdUseCase
     {
-        Task<Category> Execute(int categoryId);
+        Category Execute(int categoryId);
     }
 }

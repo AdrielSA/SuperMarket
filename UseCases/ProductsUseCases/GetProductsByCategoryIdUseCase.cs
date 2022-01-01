@@ -15,9 +15,9 @@ namespace UseCases.ProductsUseCases
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<IEnumerable<Product>> Execute(int categoryId)
+        public IEnumerable<Product> Execute(int categoryId)
         {
-            return await _unitOfWork.ProductRepository.GetProductsByCategoryId(categoryId);
+            return _unitOfWork.ProductRepository.GetProductsByCategoryId(categoryId);
         }
     }
 }

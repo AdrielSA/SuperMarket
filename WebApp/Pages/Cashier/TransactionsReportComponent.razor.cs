@@ -21,9 +21,9 @@ namespace WebApp.Pages.Cashier
             endDate = DateTime.Today;
         }
 
-        private async Task LoadTransactions()
+        private void LoadTransactions()
         {
-            transactions = await GetTransactionsUseCase.Execute(cashierName, startDate, endDate);
+            transactions = GetTransactionsUseCase.Execute(cashierName, startDate, endDate);
         }
 
         private async Task PrintReport()

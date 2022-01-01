@@ -18,17 +18,17 @@ namespace WebApp.Pages.Categories
 
         protected override async Task OnParametersSetAsync()
         {
+            await base.OnParametersSetAsync();
             if (int.TryParse(CategoryId, out int Id))
             {
-                var cat = category = await GetCategoryByIdUseCase.Execute(Id);
+                var cat = category = GetCategoryByIdUseCase.Execute(Id);
                 category = new Category { CategoryId = cat.CategoryId, Name = cat.Name, Description = cat.Description };
             }
-            await base.OnParametersSetAsync();
         }
 
-        private async Task EditCategory()
+        private void EditCategory()
         {
-            await EditCategoryUseCase.Execute(category);
+            EditCategoryUseCase.Execute(category);
             NavigationManager.NavigateTo("/categorias");
         }
 

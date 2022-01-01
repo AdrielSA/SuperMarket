@@ -1,22 +1,18 @@
 ﻿using CoreBusiness.Entities;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace UseCases.DataStoreInterfaces
 {
     public interface ICategoryRepository
     {
-        Task<IEnumerable<Category>> GetCategories();
+        IEnumerable<Category> GetCategories();
 
-        Task<Category> GetCategoryById(int categoryId);
+        Category GetCategoryById(int categoryId);
 
-        Task AddCategory(Category category);
+        void AddCategory(Category category);
 
-        Task UpdateCategory(Category category);
+        void UpdateCategory(Category category);
 
-        Task DeleteCategory(int categoryId);
+        void DeleteCategory(int categoryId);
     }
 }

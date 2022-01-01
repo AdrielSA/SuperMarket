@@ -15,7 +15,7 @@ namespace WebApp.Pages.Cashier
             await base.OnAfterRenderAsync(firstRender);
             if (firstRender)
             {
-                await SellProduct();
+                SellProduct();
             }
         }
 
@@ -24,9 +24,9 @@ namespace WebApp.Pages.Cashier
             selectedProduct = product;
         }
 
-        private async Task SellProduct()
+        private void SellProduct()
         {
-            await transactionComponent.LoadTransactions(cashierName);
+            transactionComponent.LoadTransactions(cashierName);
         }
     }
 }

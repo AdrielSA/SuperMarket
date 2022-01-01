@@ -13,9 +13,9 @@ namespace UseCases.CategoriesUseCase
             _unitOfWork = unitOfWork;
         }
 
-        public async Task Delete(int categoryId)
+        public void Delete(int categoryId)
         {
-            await _unitOfWork.CategoryRepository.DeleteCategory(categoryId);
+            _unitOfWork.CategoryRepository.DeleteCategory(categoryId);
         }
     }
 }

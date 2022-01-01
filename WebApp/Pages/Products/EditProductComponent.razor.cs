@@ -15,7 +15,7 @@ namespace WebApp.Pages.Products
         protected override async Task OnInitializedAsync()
         {
             await base.OnInitializedAsync();
-            categories = await GetCategoriesUseCase.Execute();
+            categories = GetCategoriesUseCase.Execute();
         }
 
         protected override async Task OnParametersSetAsync()
@@ -23,7 +23,7 @@ namespace WebApp.Pages.Products
             await base.OnParametersSetAsync();
             if (int.TryParse(ProductId, out int Id))
             {
-                var prod = this.product = await GetProductByIdUseCase.Execute(Id);
+                var prod = this.product = GetProductByIdUseCase.Execute(Id);
                 product = new Product
                 {
                     ProductId = prod.ProductId,
@@ -35,9 +35,9 @@ namespace WebApp.Pages.Products
             }
         }
 
-        private async Task EditProduct()
+        private void EditProduct()
         {
-            await EditProductUseCase.Execute(product);
+            EditProductUseCase.Execute(product);
             NavigationManager.NavigateTo("/productos");
         }
 

@@ -4,6 +4,6 @@ namespace UseCases.UseCaseInterfaces.Products
 {
     public interface ISellProductUseCase
     {
-        Task Execute(string cashierName, int productId, int qtyToSell);
+        void Execute(string cashierName, int productId, int qtyToSell);
     }
 }

@@ -16,9 +16,9 @@ namespace UseCases.TransactionsUseCases
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<IEnumerable<Transaction>> Execute(string cashierName, DateTime startDate, DateTime endDate)
+        public IEnumerable<Transaction> Execute(string cashierName, DateTime startDate, DateTime endDate)
         {
-            return await _unitOfWork.TransactionRepository.Search(cashierName, startDate, endDate);
+            return _unitOfWork.TransactionRepository.Search(cashierName, startDate, endDate);
         }
     }
 }

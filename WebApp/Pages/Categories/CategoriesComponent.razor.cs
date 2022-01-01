@@ -11,7 +11,7 @@ namespace WebApp.Pages.Categories
         protected override async Task OnInitializedAsync()
         {
             await base.OnInitializedAsync();
-            await Load();
+            Load();
         }
 
         private void AddCategory()
@@ -24,15 +24,15 @@ namespace WebApp.Pages.Categories
             NavigationManager.NavigateTo($"/editarcategoria/{category.CategoryId}");
         }
 
-        private async Task DeleteCategory(int categoryId)
+        private void DeleteCategory(int categoryId)
         {
-            await DeleteCategoryUseCase.Delete(categoryId);
-            await Load();
+            DeleteCategoryUseCase.Delete(categoryId);
+            Load();
         }
 
-        private async Task Load()
+        private void Load()
         {
-            categories = await ViewCategoryUseCase.Execute();
+            categories = ViewCategoryUseCase.Execute();
         }
     }
 }

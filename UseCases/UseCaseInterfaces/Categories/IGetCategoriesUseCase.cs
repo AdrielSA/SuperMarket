@@ -6,6 +6,6 @@ namespace UseCases.UseCaseInterfaces.Categories
 {
     public interface IGetCategoriesUseCase
     {
-        Task<IEnumerable<Category>> Execute();
+        IEnumerable<Category> Execute();
     }
 }

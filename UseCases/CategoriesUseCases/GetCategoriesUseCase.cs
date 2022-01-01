@@ -15,9 +15,9 @@ namespace UseCases.CategoriesUseCase
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<IEnumerable<Category>> Execute()
+        public IEnumerable<Category> Execute()
         {
-            return await _unitOfWork.CategoryRepository.GetCategories();
+            return _unitOfWork.CategoryRepository.GetCategories();
         }
     }
 }

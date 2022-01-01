@@ -23,7 +23,7 @@ namespace WebApp
             services.AddDbContext<MarketContext>(options => 
             {
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
-            });
+            }, ServiceLifetime.Transient);
 
             services.AddRazorPages();
             services.AddServerSideBlazor();

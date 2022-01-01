@@ -6,6 +6,6 @@ namespace UseCases.UseCaseInterfaces.Products
 {
     public interface IGetProductsUseCase
     {
-        Task<IEnumerable<Product>> Execute();
+        IEnumerable<Product> Execute();
     }
 }
